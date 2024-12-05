@@ -6,7 +6,7 @@ FROM python:3.10-slim
 WORKDIR /app
 
 # Copy the requirements file to the working directory
-COPY requirements.txt /app/
+COPY requirements.txt .
 
 # Install dependencies
 RUN pip install -r requirements.txt
