@@ -19,6 +19,7 @@ const PageWrapper = styled('div')(() => ({
   flexDirection: 'column',
   zIndex: 1,
   backgroundColor: 'transparent',
+  height: '100vh',
 }));
 
 const FullLayout = () => {
@@ -51,14 +52,21 @@ const FullLayout = () => {
         {/* PageContent */}
         {/* ------------------------------------------- */}
         <Container sx={{
-          paddingTop: "20px",
-          maxWidth: '1200px',
+          padding: 0, // Remove padding to allow full use of space
+          maxWidth: '100%', // Remove width restrictions
+          height: '100%', // Take full height of the parent
+          flexGrow: 1, // Allow content to grow fully
         }}
         >
-          {/* ------------------------------------------- */}
+          {/* 
+          minHeight: 'calc(100vh - 170px)'
+          ------------------------------------------- */}
           {/* Page Route */}
           {/* ------------------------------------------- */}
-          <Box sx={{ minHeight: 'calc(100vh - 170px)' }}>
+          <Box sx={{ height: '80vh', // Full viewport height for the embedded content
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',}}>
             <Outlet />
           </Box>
           {/* ------------------------------------------- */}

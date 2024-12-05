@@ -1,13 +1,14 @@
 import React, { lazy } from 'react';
 import { Navigate } from 'react-router-dom';
 import Loadable from '../layouts/full/shared/loadable/Loadable';
+import { PowerBIEmbed } from 'powerbi-client-react';
 
 /* ***Layouts**** */
 const FullLayout = Loadable(lazy(() => import('../layouts/full/FullLayout')));
 const BlankLayout = Loadable(lazy(() => import('../layouts/blank/BlankLayout')));
 
 /* ****Pages***** */
-const Dashboard = Loadable(lazy(() => import('../views/dashboard/Dashboard')))
+const PowerBiDashboard = Loadable(lazy(() => import('../components/Rapport_powerbi/dashboardPowerBi')))
 const SamplePage = Loadable(lazy(() => import('../views/sample-page/SamplePage')))
 const Icons = Loadable(lazy(() => import('../views/icons/Icons')))
 const TypographyPage = Loadable(lazy(() => import('../views/utilities/TypographyPage')))
@@ -22,7 +23,7 @@ const Router = [
     element: <FullLayout />,
     children: [
       { path: '/', element: <Navigate to="/dashboard" /> },
-      { path: '/dashboard', exact: true, element: <Dashboard /> },
+      { path: '/dashboard', exact: true, element: <PowerBiDashboard /> },
       { path: '/sample-page', exact: true, element: <SamplePage /> },
       { path: '/icons', exact: true, element: <Icons /> },
       { path: '/ui/typography', exact: true, element: <TypographyPage /> },
