@@ -14,12 +14,12 @@ jobs:
     - name: Checkout Code
       uses: actions/checkout@v3
 
-     - name: Log in to DockerHub
+    # Step 2: Log in to DockerHub
+    - name: Log in to DockerHub
       uses: docker/login-action@v2
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-
 
     # Build and push backend image
     - name: Build and push Django backend image
@@ -32,5 +32,3 @@ jobs:
       run: |
         docker build -t wafa003/front-end:latest ./frontend/risk/modernize-react-lite/package
         docker push wafa003/front-end:latest
-    
-    
