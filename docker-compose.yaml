@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  django:
+    build:
+      context: ./django_project
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./django_project:/app
+      #- ./data:/app/data  # Ensure SQLite database file is persisted
+    environment:
+      - DJANGO_SETTINGS_MODULE=your_project.settings
+    command: >
+      sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+
+  frontend:
+    build:
+      context: ./frontend/risk/modernize-react-lite/package
+      dockerfile: Dockerfile
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend/risk/modernize-react-lite/package:/app
+    environment:
+      - REACT_APP_API_URL=http://localhost:8000/api
