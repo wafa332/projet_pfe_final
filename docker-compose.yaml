@@ -5,13 +5,14 @@ services:
     build:
       context: ./django_project
       dockerfile: Dockerfile
+    image: wafa003/back-end
     ports:
       - "8000:8000"
     volumes:
-      - ./django_project:/app
-      #- ./data:/app/data  # Ensure SQLite database file is persisted
+      - django_data:/app/db.sqlite3  # Persist the SQLite database file
+    
     environment:
-      - DJANGO_SETTINGS_MODULE=your_project.settings
+      - DJANGO_SETTINGS_MODULE=myproject.settings
     command: >
       sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
 
@@ -19,6 +20,7 @@ services:
     build:
       context: ./frontend/risk/modernize-react-lite/package
       dockerfile: Dockerfile
+    image: wafa003/front-end
     ports:
       - "5173:5173"
     volumes:
