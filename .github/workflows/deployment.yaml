@@ -3,7 +3,7 @@ name: Build and Push Docker Images
 on:
   push:
     branches:
-      - wafa-yacoubi-branch # Adjust this to your main development branch
+      - main # Adjust this to your main development branch
 
 jobs:
   build-and-push:
