@@ -1,0 +1,15 @@
+/* DashboardPowerBi.css */
+.dashboard-container {
+    height: 100vh; /* Full viewport height */
+    width: 100%;   /* Full width */
+    display: flex; /* Flexbox for alignment */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+  }
+  
+  .reportClass {
+    height: 100%; /* Fill the parent container */
+    width: 100%;  /* Fill the parent container */
+    border: none; /* Optional: Remove border if any */
+  }
+  
