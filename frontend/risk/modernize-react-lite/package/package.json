@@ -17,6 +17,7 @@
     "@mui/system": "^5.14.11",
     "@svgr/rollup": "^8.1.0",
     "@tabler/icons-react": "^2.35.0",
+    "jquery": "^3.7.1",
     "lodash": "^4.17.21",
     "powerbi-client": "^2.23.1",
     "powerbi-client-react": "^1.4.0",

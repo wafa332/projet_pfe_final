@@ -42,12 +42,13 @@ const Shadows = () => {
 
   return (
     <PageContainer title="Credit Risk" description="Upload a file for risk calculation">
+      
       <Grid 
         container 
         spacing={3} 
         justifyContent="center" 
         alignItems="center" 
-        sx={{backgroundColor: '#f4f4f4', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }} // Change 1: Apply background color directly here
+        sx={{backgroundColor: 'white',flexDirection:'row', display: 'flex', alignItems: 'center', justifyContent: 'center' }} // Change 1: Apply background color directly here
       >
         <Grid 
         container 
@@ -64,6 +65,7 @@ const Shadows = () => {
               backgroundColor: 'white',
               border: `1px solid ${theme => theme.palette.grey[200]}`,
               boxShadow: `20px 30px 0px ${theme => theme.palette.grey[300]}`,
+              marginTop: '120px',
             }}
           >
             <CardContent>
@@ -160,6 +162,8 @@ const Shadows = () => {
             </CardContent>
           </Paper>
         </Grid>
+        <div className="footer-band"></div>
+        <Box sx={{ position: 'absolute', bottom: 0, left: 0, width: '100%', height: '55px', backgroundColor: '#dc6900' }} />
       </Grid>
     </PageContainer>
   );

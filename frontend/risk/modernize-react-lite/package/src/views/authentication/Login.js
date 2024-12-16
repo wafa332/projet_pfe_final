@@ -9,12 +9,13 @@ import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-//import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import logoImage from '../../assets/images/PricewaterhouseCoopers_Logo.svg.png';
 import { Link as RouterLink } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
 
 function Copyright(props) {
   return (
@@ -29,16 +30,18 @@ function Copyright(props) {
   );
 }
 
+
 const defaultTheme = createTheme();
 
 function SignInPage() {
-  const location = useLocation();  // Step 1: Use location to get URL params
+  const navigate = useNavigate();
+  const location = useLocation(); // Step 1: Use location to get URL params
   const [showConfirmation, setShowConfirmation] = useState(false);
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     if (params.get('confirmed') === 'true') {
-      setShowConfirmation(true);  // Step 2: Set the confirmation state
+      setShowConfirmation(true); // Step 2: Set the confirmation state
     }
   }, [location]);
 
@@ -54,17 +57,19 @@ function SignInPage() {
   return (
     <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
-      <img 
+        <img 
           src={logoImage} 
           alt="PwC Logo" 
           style={{
-            position: 'absolute', // Positioning to the top left corner
-            top: '30px',  // Adjust top margin as needed
-            left: '30px', // Adjust left margin as needed
-            width: '110px', // Set desired width
-            height: 'auto', // Maintain aspect ratio
-            zIndex: 1000  // Ensure it stays on top
+            position: 'absolute',
+            top: '30px',
+            left: '30px',
+            width: '110px',
+            height: 'auto',
+            zIndex: 1000,
+            cursor: 'pointer'
           }} 
+          onClick={() => navigate('/dashboard')} // Redirect to dashboard
         />
         <CssBaseline />
         <Box
@@ -79,17 +84,14 @@ function SignInPage() {
             boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)',
           }}
         >
-          {showConfirmation && (  // Step 3: Display the confirmation message
+          {showConfirmation && (
             <Box sx={{ backgroundColor: '#e6ffed', padding: 2, borderRadius: 1, marginBottom: 2 }}>
               <Typography variant="body1" color="green">
                 Congratulations! Your email has been confirmed. You can now log in.
               </Typography>
             </Box>
           )}
-          <Avatar sx={{ m: 1, bgcolor: '#dc6900' }}>
-            {//<LockOutlinedIcon />
-            }
-          </Avatar>
+          <Avatar sx={{ m: 1, bgcolor: '#dc6900' }} />
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
@@ -128,7 +130,7 @@ function SignInPage() {
             </Button>
             <Grid container>
               <Grid item>
-                <Link component={RouterLink} to="/sign-up" variant="body2">
+                <Link component={RouterLink} to="/auth/register" variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
@@ -136,7 +138,6 @@ function SignInPage() {
           </Box>
         </Box>
         <div className="footer-band"></div>
-        {/* Orange bar at the bottom */}
         <Box sx={{ position: 'absolute', bottom: 0, left: 0, width: '100%', height: '55px', backgroundColor: '#dc6900' }} />
         <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>

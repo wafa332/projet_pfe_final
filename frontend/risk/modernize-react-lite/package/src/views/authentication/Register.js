@@ -8,12 +8,14 @@ import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
+import { useNavigate } from 'react-router-dom';
 
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import logoImage from '../../assets/images/PricewaterhouseCoopers_Logo.svg.png';
 import { Link as RouterLink } from 'react-router-dom';
+import $ from 'jquery';
 
 function Copyright(props) {
   return (
@@ -29,15 +31,35 @@ function Copyright(props) {
 }
 
 
+
 const defaultTheme = createTheme();
 
 function SignUpPage() {
+  const navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
+
+    const payload = {
       email: data.get('email'),
+      first_name: data.get('firstName'),
+      last_name: data.get('lastName'),
       password: data.get('password'),
+    };
+
+    $.ajax({
+      url: 'http://127.0.0.1:8000/accounts/signup/',
+      type: 'POST',
+      contentType: 'application/json',
+      data: JSON.stringify(payload),
+      success: function (response) {
+        alert('Sign up successful!');
+        console.log('Response:', response);
+      },
+      error: function (xhr, status, error) {
+        alert('Sign up failed. Please try again.');
+        console.error('Error:', error);
+      },
     });
   };
 
@@ -54,8 +76,12 @@ function SignUpPage() {
             left: '30px', // Adjust left margin as needed
             width: '110px', // Set desired width
             height: 'auto', // Maintain aspect ratio
-            zIndex: 1000  // Ensure it stays on top
-          }}  />
+            zIndex: 1000,  // Ensure it stays on top
+            cursor: 'pointer'
+          }} 
+          onClick={() => navigate('/dashboard')}
+           
+          />
         <CssBaseline />
         <Box
           sx={{
@@ -137,7 +163,7 @@ function SignUpPage() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link component={RouterLink} to="/" variant="body2">
+                <Link component={RouterLink} to="/auth/login" variant="body2">
                   {"Already have an account? Sign in"}
                 </Link>
               </Grid>

@@ -64,6 +64,7 @@ const TypographyPage = () => {
               backgroundColor: 'white',
               border: `1px solid ${theme => theme.palette.grey[200]}`,
               boxShadow: `20px 30px 0px ${theme => theme.palette.grey[300]}`,
+              marginTop: '120px',
             }}
           >
             <CardContent>
@@ -160,6 +161,8 @@ const TypographyPage = () => {
             </CardContent>
           </Paper>
         </Grid>
+        <div className="footer-band"></div>
+        <Box sx={{ position: 'absolute', bottom: 0, left: 0, width: '100%', height: '55px', backgroundColor: '#dc6900' }} /> 
       </Grid>
     </PageContainer>
   );
