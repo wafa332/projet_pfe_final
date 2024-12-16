@@ -15,7 +15,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import logoImage from '../../assets/images/PricewaterhouseCoopers_Logo.svg.png';
 import { Link as RouterLink } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-
+import $ from 'jquery';
 
 function Copyright(props) {
   return (
@@ -35,25 +35,46 @@ const defaultTheme = createTheme();
 
 function SignInPage() {
   const navigate = useNavigate();
-  const location = useLocation(); // Step 1: Use location to get URL params
+  const location = useLocation();
   const [showConfirmation, setShowConfirmation] = useState(false);
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     if (params.get('confirmed') === 'true') {
-      setShowConfirmation(true); // Step 2: Set the confirmation state
+      setShowConfirmation(true); // Set the confirmation state
     }
   }, [location]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
+
+    // Prepare the login data
+    const loginData = {
       email: data.get('email'),
       password: data.get('password'),
+    };
+
+    console.log('Login Data:', loginData);
+
+    // Send POST request using jQuery
+    $.ajax({
+      url: 'http://127.0.0.1:8000/accounts/signin/', // Your backend login URL
+      type: 'POST',
+      contentType: 'application/json',
+      data: JSON.stringify(loginData),
+      success: function (response) {
+        console.log('Login successful:', response);
+        alert('Login successful!');
+        // Navigate to the dashboard or another page on successful login
+        navigate('/dashboard');
+      },
+      error: function (xhr, status, error) {
+        console.error('Login failed:', error);
+        alert('Login failed. Please check your credentials and try again.');
+      },
     });
   };
-
   return (
     <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
