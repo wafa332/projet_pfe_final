@@ -34,7 +34,7 @@ def upload_and_calculate_credit(request):
         return JsonResponse({'error': 'No file provided'}, status=400)
 
     file = request.FILES['file']
-    if isinstance(file, InMemoryUploadedFile):
+    if file:
         assessment = CreditRiskAssessment.objects.create(
             file_name=file.name,
             status='pending'
