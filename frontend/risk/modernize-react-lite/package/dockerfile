@@ -16,6 +16,9 @@ COPY . .
 # Build the React app
 #RUN npm run build
 
+RUN chmod +x ./node_modules/.bin/vite
+
+
 # Expose the port that the server will listen on
 EXPOSE 5173
 
