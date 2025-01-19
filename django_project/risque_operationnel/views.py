@@ -41,7 +41,7 @@ def calculate_results(data_op):
     perte = [np.sum(lognorm(s=sdlog, scale=np.exp(meanlog)).rvs(size=n) + threshold) for n in simpois]
 
     perte = np.array(perte)
-    VaR = np.percentile(perte, 50)
+    VaR = np.percentile(perte, 90)
     EL = np.mean(perte)
 
     kde = gaussian_kde(perte)
